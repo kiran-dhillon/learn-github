@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Git & GitHub Notes — Kiranjan</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card: #0b1220;
+            --muted: #94a3b8;
+            --accent: #06b6d4
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: linear-gradient(180deg, #071233 0%, #071126 100%);
+            color: #e6eef8;
+            margin: 0;
+            padding: 24px
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 16px
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 28px
+        }
+
+        p.lead {
+            margin: 6px 0 20px;
+            color: var(--muted)
+        }
+
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 18px
+        }
+
+        nav a {
+            background: var(--card);
+            padding: 8px 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #dbeafe;
+            font-size: 13px
+        }
+
+        section.card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+            padding: 18px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6)
+        }
+
+        pre {
+            background: #021129;
+            padding: 12px;
+            border-radius: 8px;
+            overflow: auto;
+            color: #d2f8ff
+        }
+
+        code {
+            font-family: SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 12px
+        }
+
+        .cheatsheet {
+            font-size: 14px
+        }
+
+        ul {
+            margin: 8px 0 12px 20px
+        }
+
+        .task {
+            background: linear-gradient(90deg, #001219, #00293c);
+            padding: 12px;
+            border-radius: 10px
+        }
+
+        footer {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 14px
+        }
+
+        @media (max-width:880px) {
+            .two-col {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.09.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.34-3.369-1.34-.454-1.157-1.11-1.466-1.11-1.466-.908-.62.07-.607.07-.607 1.004.071 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.091-.647.35-1.087.636-1.337-2.22-.253-4.555-1.11-4.555-4.944 0-1.09.39-1.98 1.03-2.676-.103-.254-.447-1.277.098-2.659 0 0 .84-.269 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.338 1.909-1.295 2.748-1.026 2.748-1.026.546 1.382.202 2.405.1 2.659.642.696 1.03 1.586 1.03 2.676 0 3.842-2.338 4.688-4.566 4.935.36.31.682.92.682 1.852 0 1.335-.012 2.414-.012 2.744 0 .269.18.579.688.481C19.138 20.165 22 16.416 22 12c0-5.523-4.477-10-10-10z"
+                    fill="#06b6d4" />
+            </svg>
+            <div>
+                <h1>Git &amp; GitHub Notes — Developer Cheat Sheet</h1>
+                <p class="lead">Short, practical notes and commands you can copy. Simple steps for daily developer work
+                    (Kiranjan).</p>
+            </div>
+        </header>
+
+        <nav>
+            <a href="#basics">Basics</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#branching">Branching</a>
+            <a href="#mergeconflicts">Merge Conflicts</a>
+            <a href="#cheatsheet">Cheatsheet</a>
+            <a href="#tasks">Tasks</a>
+        </nav>
+
+        <div class="two-col">
+            <main>
+                <section id="basics" class="card">
+                    <h2>1. Basics — What &amp; Why</h2>
+                    <p>Git = distributed version control. GitHub = cloud hosting + collaboration platform. Use Git
+                        locally to track snapshots; push to GitHub for sharing & backup.</p>
+
+                    <h3>Common flow (local)</h3>
+                    <ol>
+                        <li>Make changes in working directory</li>
+                        <li><code>git add</code> → stage changes</li>
+                        <li><code>git commit</code> → commit snapshot</li>
+                        <li><code>git push</code> → upload to remote</li>
+                    </ol>
+
+                    <h3>First-time commands</h3>
+                    <pre><code># set identity (only once per machine)
+$ git config --global user.name "Your Name"
+$ git config --global user.email "you@example.com"
+
+# create repo locally
+$ git init
+
+# create repo on GitHub then connect remote (example)
+$ git remote add origin https://github.com/username/repo.git
+$ git branch -M main
+$ git push -u origin main
+</code></pre>
+                </section>
+
+                <section id="workflow" class="card">
+                    <h2>2. Developer Workflow (Real projects)</h2>
+                    <p>Typical pattern used in teams:</p>
+                    <ul>
+                        <li>Clone repo: <code>git clone &lt;url&gt;</code></li>
+                        <li>Create feature branch: <code>git checkout -b feature/xyz</code></li>
+                        <li>Work locally — add &amp; commit frequently (small commits)</li>
+                        <li>Push feature branch: <code>git push origin feature/xyz</code></li>
+                        <li>Open Pull Request (PR) on GitHub → review → merge</li>
+                        <li>Delete branch after merge</li>
+                    </ul>
+
+                    <h3>Important commands</h3>
+                    <pre><code>$ git status          # current state
+$ git add .
+$ git commit -m "short, meaningful message"
+$ git push origin feature/xyz
+$ git pull origin main   # bring latest main locally
+</code></pre>
+                </section>
+
+                <section id="branching" class="card">
+                    <h2>3. Branching &amp; Names</h2>
+                    <p>Use readable branch names: <code>feature/login</code>, <code>fix/header-bug</code>,
+                        <code>hotfix/critical-1</code>.</p>
+
+                    <h3>Create &amp; switch</h3>
+                    <pre><code>$ git branch new-branch      # create
+$ git switch new-branch      # switch (recommended)
+$ git checkout -b new-branch # create + switch
+</code></pre>
+
+                    <h3>Merge vs Rebase</h3>
+                    <p><strong>Merge</strong> creates a merge commit and preserves history. <strong>Rebase</strong>
+                        rewrites commits to create a linear history (use carefully on shared branches).</p>
+                    <pre><code># merge feature into main
+$ git switch main
+$ git merge feature/xyz
+
+# rebase feature onto latest main (local)
+$ git switch feature/xyz
+$ git rebase main
+</code></pre>
+                </section>
+
+                <section id="mergeconflicts" class="card">
+                    <h2>4. Merge Conflicts (How to solve)</h2>
+                    <p>Conflict happens when same lines changed in two branches. Steps:</p>
+                    <ol>
+                        <li>Run <code>git status</code> to see conflicted files</li>
+                        <li>Open file, look for markers <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code></li>
+                        <li>Keep correct code, remove markers</li>
+                        <li><code>git add &lt;file&gt;</code></li>
+                        <li><code>git commit</code> (or <code>git rebase --continue</code> if rebasing)</li>
+                    </ol>
+
+                    <pre><code><<<<<<< HEAD
+// your code
+=======
+// other branch code
+>>>>>>> feature/xyz
+</code></pre>
+                </section>
+
+                <section id="pullrequests" class="card">
+                    <h2>5. Pull Requests &amp; Code Review</h2>
+                    <ul>
+                        <li>Open PR from your branch → target main (or develop)</li>
+                        <li>Write clear PR description: what changed, why, screenshots, steps to test</li>
+                        <li>Request reviewers, address feedback with additional commits</li>
+                        <li>Prefer small PRs — easier to review</li>
+                    </ul>
+                </section>
+
+                <section id="cheatsheet" class="card">
+                    <h2>6. Cheatsheet — Most used commands</h2>
+                    <pre class="cheatsheet"><code># clone remote repo
+$ git clone https://github.com/username/repo.git
+
+# check status & history
+$ git status
+$ git log --oneline --graph --decorate
+
+# stage & commit
+$ git add path/file.js
+$ git commit -m "fix: header layout"
+
+# push & pull
+$ git push origin branch-name
+$ git pull origin main
+
+# branches
+$ git branch
+$ git branch -d branch-name
+$ git push origin --delete branch-name
+
+# stash (save WIP)
+$ git stash         # save
+$ git stash list
+$ git stash apply   # re-apply
+
+# undo local changes
+$ git checkout -- file.txt   # restore file from HEAD
+$ git reset --hard HEAD      # WARNING: discards local commits and changes
+</code></pre>
+                </section>
+
+                <section id="tasks" class="card">
+                    <h2>7. Tasks (Practice) — Do these now</h2>
+                    <div class="task">
+                        <ol>
+                            <li>Clone any public repo from GitHub.</li>
+                            <li>Create a branch: <code>git checkout -b practice/yourname</code></li>
+                            <li>Edit README (add a line), commit and push.</li>
+                            <li>Open a Pull Request and merge it (if you own the repo) or create PR to a fork.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="tips" class="card">
+                    <h2>8. Tips &amp; Best Practices</h2>
+                    <ul>
+                        <li>Commit early, commit often. Small commits are easier to review.</li>
+                        <li>Write meaningful commit messages: <code>type(scope): short summary</code></li>
+                        <li>Use .gitignore to avoid committing node_modules, secrets, build artifacts.</li>
+                        <li>Never force-push to a shared branch without coordination.</li>
+                        <li>Protect main branch with branch-protection rules on GitHub.</li>
+                    </ul>
+                </section>
+
+            </main>
+
+            <aside>
+                <section class="card">
+                    <h3>Quick Reference</h3>
+                    <pre><code>git init
+git clone <url>
+git status
+git add .
+git commit -m "msg"
+git push origin branch
+git pull origin main
+</code></pre>
+
+                    <h3>Useful GitHub UI</h3>
+                    <ul>
+                        <li>Watch / Star / Fork</li>
+                        <li>Issues &amp; Projects</li>
+                        <li>Actions (CI)</li>
+                        <li>Environments &amp; Releases</li>
+                    </ul>
+                </section>
+
+                <section class="card">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="https://git-scm.com/docs" target="_blank">Official Git docs</a></li>
+                        <li><a href="https://docs.github.com/" target="_blank">GitHub Docs</a></li>
+                        <li>Try Git interactive: <code>https://learngitbranching.js.org/</code></li>
+                    </ul>
+                </section>
+
+                <section class="card">
+                    <h3>Cheat: commit message style</h3>
+                    <p class="muted">Examples:</p>
+                    <pre><code>feat(auth): add login with google
+fix(ui): correct mobile button spacing
+docs: update README
+chore: bump packages
+</code></pre>
+                </section>
+            </aside>
+        </div>
+
+      
+    </div>
+</body>
+
+</html>
